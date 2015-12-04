@@ -36,7 +36,7 @@ gettext.install(__appname__)
 _FOR_UBUNTU = "trusty"
 _DEBUG = 1
 _LOG_FILE = "/tmp/%s.log" % __appname__
-_CONF_FILE = "https://github.com/ClementAubry/MyUbuntu/blob/master/UbuntuPostInstall/ubuntu-14.04.3LTS-postinstall.cfg"
+_CONF_FILE = "https://raw.githubusercontent.com/ClementAubry/MyUbuntu/master/UbuntuPostInstall/ubuntu-14.04.3LTS-postinstall.cfg"
 
 # System commands
 #-----------------------------------------------------------------------------
