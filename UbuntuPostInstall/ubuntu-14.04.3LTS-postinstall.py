@@ -387,16 +387,9 @@ def main(argv):
     # Parse and exec post-actions
     for action_name, action_cmd in config.items("postactions"):
         showexec (_("Execute postaction ")+action_name.lstrip("action_"), action_cmd)
-        # Download and install dotfiles: vimrc, prompt...
-    if (config.has_section("dotfilesAfterPostAction")):
-        if (config.has_option("dotfilesAfterPostAction", "zshrc")):
-            showexec (_("Download zsh main configuration file"), _WGET+" -O $HOME/.zshrc "+config.get("dotfilesAfterPostAction", "zshrc"))
-        showexec (_("Install the zsh configuration file"), "chown -R $USERNAME:$USERNAME $HOME/.zshrc")
 
-    #showexec (_("chmod on what have been done here"), "chown -R $USERNAME:$USERNAME $HOME/.zshrc")
-    #showexec (_("chmod on what have been done here"), "chown -R $USERNAME:$USERNAME $HOME/.oh-my-zsh")
+    showexec (_("chmod on what have been done here"), "chown -R $USERNAME:$USERNAME $HOME")
     showexec (_("Add user to dialout group"), "addgroup $USERNAME dialout")
-
 
     # End of the script
     print("---")
