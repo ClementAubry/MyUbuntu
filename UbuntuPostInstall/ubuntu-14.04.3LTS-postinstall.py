@@ -47,6 +47,7 @@ _APT_REMOVE = "DEBIAN_FRONTEND=noninteractive apt-get -y -f remove"
 _APT_UPDATE = "DEBIAN_FRONTEND=noninteractive apt-get -y update"
 _APT_UPGRADE = "DEBIAN_FRONTEND=noninteractive apt-get -y upgrade"
 _APT_KEY = "apt-key adv --keyserver keyserver.ubuntu.com --recv-keys"
+_APT_KEYSERVER = "apt-key adv --keyserver"
 _WGET = "wget"
 
 # Classes
@@ -291,6 +292,8 @@ def main(argv):
             showexec (_("Install repository ")+item_type.lstrip("ppa_"), _APT_ADD+" "+item_value)
         elif (item_type.startswith("url_")):
             showexec (_("Install repository ")+item_type.lstrip("url_"), _APT_ADD+" \\\"deb "+item_value+"\\\"")
+        elif (item_type.startswith("keyandserver_")):
+            showexec (_("Install key from server for the ")+item_type.lstrip("keyandserver_")+" repository", _APT_KEYSERVER+" "+item_value)
         elif (item_type.startswith("key_")):
             showexec (_("Install key for the ")+item_type.lstrip("key_")+" repository", _APT_KEY+" "+item_value)
         elif (item_type.startswith("pkg_")):
