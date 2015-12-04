@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/home/clement/.oh-my-zsh
+export ZSH=~/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -95,5 +95,3 @@ export INFOPATH=/usr/local/texlive/2015/texmf-dist/doc/info:$INFOPATH
 
 #copy from line A to line B of fileIn.txt and put it into fileOut.txt
 #sed -n 'A,Bp' fileIn.txt > fileOut.txt
-
-source ~/.oh-my-zsh/custom/rosConfig.zsh
