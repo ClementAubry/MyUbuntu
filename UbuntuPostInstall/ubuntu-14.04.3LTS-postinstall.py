@@ -389,6 +389,7 @@ def main(argv):
         showexec (_("Execute postaction ")+action_name.lstrip("action_"), action_cmd)
 
     showexec (_("chmod on what have been done here"), "chown -R $SUDO_USER:$SUDO_USER $HOME")
+    showexec (_("Add user to vbousers to be able to use usb ports (USB3 not supported?)"), "usermod -G vboxusers -a $SUDO_USER")
     showexec (_("Add user to dialout group"), "addgroup $USERNAME dialout")
 
     # End of the script
