@@ -388,7 +388,7 @@ def main(argv):
     for action_name, action_cmd in config.items("postactions"):
         showexec (_("Execute postaction ")+action_name.lstrip("action_"), action_cmd)
 
-    showexec (_("chmod on what have been done here"), "chown -R $USERNAME:$USERNAME $HOME")
+    showexec (_("chmod on what have been done here"), "chown -R $SUDO_USER:$SUDO_USER $HOME")
     showexec (_("Add user to dialout group"), "addgroup $USERNAME dialout")
 
     # End of the script
