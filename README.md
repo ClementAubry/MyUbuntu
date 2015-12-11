@@ -1,1 +1,3 @@
 # MyUbuntu
+
+This script install some applications ...
