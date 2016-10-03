@@ -93,7 +93,7 @@ def syntax():
     """
     Print the script syntax
     """
-    print(_("Ubuntu 14.04 post installation script version %s for %s") 
+    print(_("Ubuntu 14.04 post installation script version %s for %s")
                                             % (__version__, _FOR_UBUNTU))
     print("")
     print(_("Syntax: %s.py [-c cfgfile] [-h] [-v]") % __appname__)
@@ -154,7 +154,7 @@ def showexec(description, command, exitonerror = 0, presskey = 0, waitmessage = 
     # Display the command
     if (presskey == 1):
         status = _("[ ENTER ]")
-    else:    
+    else:
         status = _("[Running]")
     statuscolor = colors.BLUE
     sys.stdout.write (colors.NO + "%s" % waitmessage + statuscolor + "%s" % status.rjust(79-len(waitmessage)) + colors.NO)
@@ -164,13 +164,13 @@ def showexec(description, command, exitonerror = 0, presskey = 0, waitmessage = 
     if (presskey == 1):
         try:
             input = raw_input
-        except: 
+        except:
             pass
         raw_input()
 
     # Run the command
     returncode = os.system ("/bin/sh -c \"%s\" >> /dev/null 2>&1" % command)
-    
+
     # Display the result
     if ((returncode == 0) or (returncode == 25600)):
         status = "[  OK   ]"
@@ -185,12 +185,12 @@ def showexec(description, command, exitonerror = 0, presskey = 0, waitmessage = 
 
     sys.stdout.write (colors.NO + "\r%s" % description + statuscolor + "%s\n" % status.rjust(79-len(description)) + colors.NO)
 
-    if _DEBUG: 
+    if _DEBUG:
         logging.debug (_("Returncode = %d") % returncode)
 
     # Stop the program if returncode and exitonerror != 0
     if ((returncode != 0) & (exitonerror != 0)):
-        if _DEBUG: 
+        if _DEBUG:
             logging.debug (_("Forced to quit"))
         exit(exitonerror)
 
@@ -199,9 +199,9 @@ def getpassword(description = ""):
     """
     Read password (with confirmation)
     """
-    if (description != ""): 
+    if (description != ""):
         sys.stdout.write ("%s\n" % description)
-        
+
     password1 = getpass.getpass(_("Password: "));
     password2 = getpass.getpass(_("Password (confirm): "));
 
@@ -218,7 +218,7 @@ def getstring(message = _("Enter a value: ")):
     """
     try:
         input = raw_input
-    except: 
+    except:
         pass
     return raw_input(message)
 
@@ -229,12 +229,12 @@ def waitenterpressed(message = _("Press ENTER to continue...")):
     """
     try:
         input = raw_input
-    except: 
+    except:
         pass
     raw_input(message)
     return 0
 
-        
+
 def main(argv):
     """
     Main function
@@ -265,26 +265,26 @@ def main(argv):
     # Are your root ?
     if (not isroot()):
         showexec (_("Script should be run as root"), "tpastroot", exitonerror = 1)
-        
-    # Is it Precise Pangolin ?
+
+    # Is it Trusty ?
     _UBUNTU_VERSION = platform.linux_distribution()[2]
     if (_UBUNTU_VERSION != _FOR_UBUNTU):
         showexec (_("Script only for Ubuntu %s") % _FOR_UBUNTU, "badubuntuversion", exitonerror = 1)
-    
+
     # Read the configuration file
     if (config_file == ""):
         config_file = "/tmp/%s.cfg" % __appname__
-        showexec (_("Download the configuration file"), "rm -f "+config_file+" ; "+_WGET+" -O "+config_file+" "+config_url)        
+        showexec (_("Download the configuration file"), "rm -f "+config_file+" ; "+_WGET+" -O "+config_file+" "+config_url)
     config = ConfigParser.RawConfigParser()
     config.read(config_file)
 
     if (config.has_section("gnome3") and config.has_section("unity")):
-        showexec (_("Can not use both Gnome 3 and Unity, please change your .cfg file"), "gnome3etunitygrosboulet", exitonerror = 1)        
+        showexec (_("Can not use both Gnome 3 and Unity, please change your .cfg file"), "gnome3etunitygrosboulet", exitonerror = 1)
 
     # Parse and exec pre-actions
     for action_name, action_cmd in config.items("preactions"):
         showexec (_("Execute preaction ")+action_name.lstrip("action_"), action_cmd)
-        
+
     # Parse and install repositories
     pkg_list_others = {}
     for item_type, item_value in config.items("repos"):
@@ -301,7 +301,7 @@ def main(argv):
 
     # Update repos
     showexec (_("Update repositories"), _APT_UPDATE)
-    
+
     # Upgrade system
     showexec (_("System upgrade (~20 mins, please be patient...)"), _APT_UPGRADE)
 
@@ -311,7 +311,7 @@ def main(argv):
             showexec (_("Remove packages ")+pkg_type.lstrip("remove_"), _APT_REMOVE+" "+pkg_list)
         else:
             showexec (_("Install packages ")+pkg_type, _APT_INSTALL+" "+pkg_list)
-    
+
     # Install packages related to repositories
     #~ print pkg_list_others
     for pkg in pkg_list_others.keys():
@@ -340,7 +340,7 @@ def main(argv):
         if (config.has_option("dotfiles", "htoprc")):
             showexec (_("Download the Htop configuration file"), _WGET+" -O $HOME/.htoprc "+config.get("dotfiles", "htoprc"))
             showexec (_("Install the Htop configuration file"), "chown -R $USERNAME:$USERNAME $HOME/.htoprc")
-        
+
         # Pythonrc
         if (config.has_option("dotfiles", "pythonrc")):
             showexec (_("Download the Pythonrc configuration file"), _WGET+" -O $HOME/.pythonrc "+config.get("dotfiles", "pythonrc"))
