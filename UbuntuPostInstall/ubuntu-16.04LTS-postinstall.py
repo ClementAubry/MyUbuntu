@@ -1,22 +1,22 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# Mon script de post installation Ubuntu 14.04
+# Mon script de post installation Ubuntu 16.04
 #
-# Syntax: # sudo ./ubuntupostinstall-14.04.sh
+# Syntax: # sudo ./ubuntupostinstall-16.04.sh
 #
 # Nicolargo (aka) Nicolas Hennion
 # http://www.nicolargo.com
 # Distributed under the GPL version 3 license
 #
 
-__appname__ = 'ubuntu-16.04.1-postinstall'
+__appname__ = 'ubuntu-16.04.3-postinstall'
 __version__ = "0.1"
 __author__ = "Clement Aubry from Nicolas Hennion <nicolas@nicolargo.com>"
 __licence__ = "LGPL"
 
 """
-Post installation script for Ubuntu 16.04.1
+Post installation script for Ubuntu 16.04.3
 """
 
 import os
@@ -93,7 +93,7 @@ def syntax():
     """
     Print the script syntax
     """
-    print(_("Ubuntu 16.04.1 post installation script version %s for %s")
+    print(_("Ubuntu 16.04 post installation script version %s for %s")
                                             % (__version__, _FOR_UBUNTU))
     print("")
     print(_("Syntax: %s.py [-c cfgfile] [-h] [-v]") % __appname__)
@@ -389,7 +389,6 @@ def main(argv):
         showexec (_("Execute postaction ")+action_name.lstrip("action_"), action_cmd)
 
     showexec (_("chmod on what have been done here"), "chown -R $SUDO_USER:$SUDO_USER $HOME")
-    showexec (_("Add user to vbousers to be able to use usb ports"), "usermod -G vboxusers -a $SUDO_USER")
     showexec (_("Add user to dialout group"), "addgroup $SUDO_USER dialout")
 
     # End of the script
