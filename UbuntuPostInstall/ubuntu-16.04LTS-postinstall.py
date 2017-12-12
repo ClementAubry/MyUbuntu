@@ -36,7 +36,7 @@ gettext.install(__appname__)
 _FOR_UBUNTU = "xenial"
 _DEBUG = 1
 _LOG_FILE = "/tmp/%s.log" % __appname__
-_CONF_FILE = "https://raw.githubusercontent.com/ClementAubry/MyUbuntu/master/UbuntuPostInstall/ubuntu-16.04.1LTS-postinstall.cfg"
+_CONF_FILE = "https://raw.githubusercontent.com/ClementAubry/MyUbuntu/master/UbuntuPostInstall/ubuntu-16.04LTS-postinstall-turtlebotROSKinetic.cfg"
 
 # System commands
 #-----------------------------------------------------------------------------
